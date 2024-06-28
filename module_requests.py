@@ -1,7 +1,16 @@
 from libwords import list_levels_difficulty, list_topics, list_words_levels
+import os
+
+
+CONSOLE_COMMAND_CLEAR = 'cls' if os.name == 'nt' else 'clear'
+
+
+def clear_screen() -> None:
+    os.system(CONSOLE_COMMAND_CLEAR)
 
 
 def date_request(selected_topic=None) -> list[str]:
+    clear_screen()
     if selected_topic is None:
         for index_topic, topic in enumerate(list_topics):
             print(f"{index_topic} - {topic.capitalize()}")
@@ -39,6 +48,7 @@ def date_request(selected_topic=None) -> list[str]:
         if user_level_difficulty not in range(len(list_levels_difficulty)):
             raise ValueError
         else:
+            clear_screen()
             print("~" * 40)
             print(f"Тематика - {list_topics[selected_topic].capitalize()}")
             print(
